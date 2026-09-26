@@ -1,17 +1,10 @@
 // Step 1 of the build: writes every glyph in letters.js out as polygons
 // (glyphs.json) for build.py.
-//   node export.js [folder]
-// Given a folder, first copies letters.js and specimen.html in from it (where
-// the letters are being drawn); without one, uses the letters.js here.
+//   node export.js
 const fs = require("fs");
 const path = require("path");
 
 const here = __dirname;
-const working = process.argv[2];
-if (working) {
-  fs.copyFileSync(path.join(working, "letters.js"), path.join(here, "letters.js"));
-  fs.copyFileSync(path.join(working, "specimen.html"), path.join(here, "specimen.html"));
-}
 
 const root = {};
 new Function(fs.readFileSync(path.join(here, "letters.js"), "utf8")).call(root);
