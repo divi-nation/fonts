@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chockabloque</title>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root { --paper: #ece5d6; --ink: #1f2f35; --red: #d8452b; --teal: #2d5566; --cream: #faf7f1; }
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 32px 24px 60px; background: var(--paper); color: var(--ink); font-family: "Josefin Sans", sans-serif; }
+    h1 { margin: 0 0 6px; font-size: .9rem; letter-spacing: .3em; text-transform: uppercase; }
+    h2 { margin: 36px 0 14px; font-size: .75rem; letter-spacing: .3em; text-transform: uppercase; }
+    p { margin: 0 0 28px; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; color: #5a6166; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 18px; }
+    .cell { background: var(--cream); padding: 16px 16px 10px; display: grid; gap: 8px; justify-items: center; align-content: end; }
+    .cell svg { height: 90px; width: auto; max-width: 100%; fill: var(--ink); overflow: visible; }
+    .cell span { font-size: .75rem; letter-spacing: .2em; }
+    .words { margin-top: 40px; display: grid; gap: 20px; }
+    .word { display: flex; flex-wrap: wrap; gap: 6px; padding: 22px 22px 12px; }
+    .word svg { height: 44px; width: auto; }
+    .word.a { background: var(--red); } .word.a svg { fill: var(--cream); }
+    .word.b { background: var(--teal); } .word.b svg { fill: var(--ink); }
+    .word.c { background: var(--cream); } .word.c svg { fill: var(--ink); }
+  </style>
+</head>
+<body>
+  <h1>Chockabloque</h1>
+  <p>Drawn for the design · 12 × 12 grid · slabs, chamfers, notches, slits</p>
+  <h2>Letters</h2>
+  <div class="grid" id="letters"></div>
+  <h2>Figures</h2>
+  <div class="grid" id="figures"></div>
+  <h2>Signs</h2>
+  <div class="grid" id="signs"></div>
+  <div class="words" id="words"></div>
+  <script src="letters.js"></script>
+  <script>
+    function esc(c) { return c.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); }
+    // Height 14 leaves room for a comma's tail below the letters.
+    function svg(ch) { var w = glyphWidth(ch); return '<svg viewBox="0 0 ' + w + ' 14" width="' + w + '" height="14" role="img" aria-label="' + esc(ch) + '"><path fill-rule="evenodd" d="' + letterPath(ch) + '"/></svg>'; }
+    function grid(id, chars) { document.getElementById(id).innerHTML = chars.map(function (c) { return '<div class="cell">' + svg(c) + '<span>' + esc(c) + '</span></div>'; }).join(''); }
+    grid('letters', CHOCKABLOQUE_LETTERS);
+    grid('figures', CHOCKABLOQUE_FIGURES);
+    grid('signs', CHOCKABLOQUE_SIGNS);
+    document.getElementById('words').innerHTML = [['EIRA', 'a'], ['CRICKET', 'b'], ['HARDER, STRONGER!', 'c'], ['QUICK JAZZ VOW?', 'a'], ['BOXING WIZARDS', 'b'], ['24/7 & $100 (+15%)', 'c'], ['"OPEN AT 9:30"; @HOME #1', 'a']].map(function (w) {
+      return '<div class="word ' + w[1] + '">' + w[0].split('').map(function (c) { return c === ' ' ? '<span style="width:24px"></span>' : svg(c); }).join('') + '</div>';
+    }).join('');
+  </script>
+</body>
+</html>

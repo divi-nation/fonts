@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chockabloque preview</title>
+  <link rel="stylesheet" href="chockabloque.css">
+  <style>
+    :root { --paper: #ece5d6; --ink: #1f2f35; --red: #d8452b; --cream: #faf7f1; }
+    body { margin: 0; padding: 32px 24px 60px; background: var(--paper); color: var(--ink); font-family: system-ui, sans-serif; }
+    .face { font-family: "Chockabloque", sans-serif; }
+    .big { font-size: 72px; line-height: 1.1; margin: 0 0 24px; }
+    .band { background: var(--red); color: var(--cream); padding: 16px 20px; font-size: 40px; margin: 0 0 16px; }
+    .sizes p { margin: 0 0 8px; }
+    textarea { width: 100%; box-sizing: border-box; min-height: 120px; font-size: 48px; padding: 12px; background: var(--cream); color: var(--ink); border: 0; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 18px; }
+    .cell { background: var(--cream); padding: 16px 8px 10px; display: grid; gap: 8px; justify-items: center; }
+    .cell b { font-family: "Chockabloque", sans-serif; font-weight: normal; font-size: 84px; line-height: 1; }
+    .cell span { font-size: .75rem; letter-spacing: .2em; }
+    small { display: block; margin: 28px 0 8px; letter-spacing: .15em; text-transform: uppercase; font-size: .75rem; }
+  </style>
+</head>
+<body>
+  <p class="face big">Chockabloque</p>
+  <p class="face band">abcdefghijklmnopqrstuvwxyz</p>
+  <p class="face band">0123456789 !@#$%^&amp;*()_+;:'"&lt;&gt;,.?/-</p>
+  <div class="face sizes">
+    <p style="font-size:14px">The quick brown fox jumps over the lazy dog, 24/7.</p>
+    <p style="font-size:24px">The quick brown fox jumps over the lazy dog, 24/7.</p>
+    <p style="font-size:36px">"Open at 9:30"; @home #1 &amp; $100 (+15%)</p>
+  </div>
+  <small>Type here</small>
+  <textarea class="face" spellcheck="false">Type anything</textarea>
+  <small>Every character</small>
+  <div class="grid" id="grid"></div>
+  <script>
+    // Typed text in the font, not drawings: what a web page using it will show.
+    var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+;:'\"<>,.?/-";
+    document.getElementById('grid').innerHTML = chars.split('').map(function (c) {
+      var t = document.createElement('b'); t.textContent = c;
+      var l = document.createElement('span'); l.textContent = c;
+      return '<div class="cell">' + t.outerHTML + l.outerHTML + '</div>';
+    }).join('');
+  </script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+/* Chockabloque — link this file, then use font-family: "Chockabloque". */
+@font-face {
+  font-family: "Chockabloque";
+  src: url("Chockabloque-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
